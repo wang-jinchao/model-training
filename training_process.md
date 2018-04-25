@@ -44,7 +44,8 @@ python object_detection/eval.py \
     --eval_dir="/media/wangjinchao/bankcard/Evaluation/"
 
 
-TensorBoard监控：localhost:6006
+## TensorBoard监控：  
+localhost:6006
 
 tensorboard --logdir= .
 
