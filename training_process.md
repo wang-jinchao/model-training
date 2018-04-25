@@ -45,11 +45,12 @@ https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc
 
 
 ## TensorBoard监控：  
-localhost:6006
 
-tensorboard --logdir= .
+- localhost:6006  
 
-tensorboard --logdir= . --port = 6007
+- tensorboard --logdir= .
+
+- tensorboard --logdir= . --port = 6007
 
 ## Freeze Model模型导出：
 `object_detection_tutorial.ipynb`  
