@@ -1,4 +1,12 @@
 # Installation
+
+    virtualenv --no-site-packages p2tf1.4
+    pip install --upgrade tensorflow-gpu==1.7  
+    
+>functools.partial(tf.data.TFRecordDataset, buffer_size=8 * 1000 * 1000),
+AttributeError: 'module' object has no attribute 'data'
+
+
 Protobuf Compilation  
 https://github.com/tensorflow/models/issues/1834  
 
@@ -16,7 +24,7 @@ https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc
     wget http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_2017_11_17.tar.gz
     tar zxvf ssd_mobilenet_v1_coco_2017_11_17.tar.gz
 
-训练：  
+## 训练：  
 
     python object_detection/train.py \
         --logtostderr \
@@ -26,18 +34,10 @@ https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc
     python object_detection/train.py \
         --logtostderr \
         --pipeline_config_path="/media/wangjinchao/bankcard/ssd_mobilenet_v1_coco.config" \
-        --train_dir="/media/wangjinchao/bankcard/training/"
-
-
-functools.partial(tf.data.TFRecordDataset, buffer_size=8 * 1000 * 1000),
-AttributeError: 'module' object has no attribute 'data'
-
-
-    virtualenv --no-site-packages p2tf1.4
-    pip install --upgrade tensorflow-gpu==1.7
-
-
-python object_detection/eval.py \
+        --train_dir="/media/wangjinchao/bankcard/training/"  
+---
+## 评估：
+    python object_detection/eval.py \
     --logtostderr \
     --pipeline_config_path="/media/wangjinchao/bankcard/ssd_mobilenet_v1_coco.config" \
     --checkpoint_dir="/media/wangjinchao/bankcard/training/" \
