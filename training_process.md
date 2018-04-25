@@ -56,7 +56,8 @@ tensorboard --logdir= . --port = 6007
 
 tensorflow/python/tools/freeze_graph.py
 
-https://www.ctolib.com/topics-125559.html
+https://www.ctolib.com/topics-125559.html  
+
     python export_inference_graph.py \
     --input_type image_tensor
     --pipeline_config_path D:/training-sets /data-translate/training/ssd_mobilenet_v1_pets.config \
