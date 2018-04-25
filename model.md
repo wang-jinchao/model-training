@@ -37,3 +37,27 @@ AttributeError: 'module' object has no attribute 'data'
     pip install --upgrade tensorflow-gpu==1.7
 
 
+python object_detection/eval.py \
+    --logtostderr \
+    --pipeline_config_path="/media/wangjinchao/bankcard/ssd_mobilenet_v1_coco.config" \
+    --checkpoint_dir="/media/wangjinchao/bankcard/training/" \
+    --eval_dir="/media/wangjinchao/bankcard/Evaluation/"
+
+
+TensorBoard监控：localhost:6006
+
+tensorboard --logdir= .
+
+tensorboard --logdir= . --port = 6007
+
+## Freeze Model模型导出：
+`object_detection_tutorial.ipynb`  
+
+tensorflow/python/tools/freeze_graph.py
+
+https://www.ctolib.com/topics-125559.html
+    python export_inference_graph.py \
+    --input_type image_tensor
+    --pipeline_config_path D:/training-sets /data-translate/training/ssd_mobilenet_v1_pets.config \
+    --trained_checkpoint_prefix D:/training-sets /data-translate/training/ssd_mobilenet_v1_pets.config /model.ckpt-* \
+    --output_directory D:/training-sets /data-translate/training/result
