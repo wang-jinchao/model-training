@@ -1,3 +1,4 @@
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 # Installation
 
     virtualenv --no-site-packages p2tf1.4
@@ -35,13 +36,19 @@ https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc
         --logtostderr \
         --pipeline_config_path="/media/wangjinchao/bankcard/ssd_mobilenet_v1_coco.config" \
         --train_dir="/media/wangjinchao/bankcard/training/"  
+    
+    python object_detection/train.py \
+        --logtostderr \
+        --pipeline_config_path="/media/wangjinchao/bankcard/data/ssd_mobilenet_v2_coco_2018_03_29/pipeline.config" \
+        --train_dir="/media/wangjinchao/bankcard/training_v2/"    
+
 ---
 ## 评估：
     python object_detection/eval.py \
     --logtostderr \
     --pipeline_config_path="/media/wangjinchao/bankcard/ssd_mobilenet_v1_coco.config" \
     --checkpoint_dir="/media/wangjinchao/bankcard/training/" \
-    --eval_dir="/media/wangjinchao/bankcard/Evaluation/"
+    --eval_dir="/media/wangjinchao/bankcard/Evaluation_v1/"
 
 
 ## TensorBoard监控：  
@@ -60,7 +67,29 @@ tensorflow/python/tools/freeze_graph.py
 https://www.ctolib.com/topics-125559.html  
 
     python export_inference_graph.py \
-    --input_type image_tensor
-    --pipeline_config_path D:/training-sets /data-translate/training/ssd_mobilenet_v1_pets.config \
-    --trained_checkpoint_prefix D:/training-sets /data-translate/training/ssd_mobilenet_v1_pets.config /model.ckpt-* \
-    --output_directory D:/training-sets /data-translate/training/result
+    --input_type image_tensor \
+    --pipeline_config_path "/media/wangjinchao/bankcard/ssd_mobilenet_v1_coco.config" \
+    --trained_checkpoint_prefix "/media/wangjinchao/bankcard/training/model.ckpt-9961" \
+    --output_directory "/media/wangjinchao/bankcard/result/output_inference_graph.pb"  
+
+trained_checkpoint_prefix应该指定多少代的模型，--trained_checkpoint_prefix /media/wangjinchao/bankcard/training/model.ckpt-9961
+
+
+
+ValueError: Protocol message RewriterConfig has no "layout_optimizer" field.
+
+
+"layout_optimizer" to "optimize_tensor_layout" on line 72 in exporter.py
+
+
+models/research/object_detection/exporter.py line 71/72 from
+
+rewrite_options = rewriter_config_pb2.RewriterConfig(
+          layout_optimizer=rewriter_config_pb2.RewriterConfig.ON)
+to
+rewrite_options = rewriter_config_pb2.RewriterConfig()
+
+
+https://github.com/tensorflow/tensorflow/issues/582
+
+PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
