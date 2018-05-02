@@ -14,11 +14,12 @@ https://github.com/tensorflow/models/issues/1834
     cd tensorflow/models/research/
     /home/wangjinchao/tensorflow/protoc_3.3/bin/protoc object_detection/protos/*.proto --python_out=.  
 
-    # From tensorflow/models/research/
+    /home/wangjinchao/tensorflow/protoc_3.5.0/bin/protoc object_detection/protos/*.proto --python_out=.
+
     export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 
     python object_detection/builders/model_builder_test.py
-
+       
 
 https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md  
 
@@ -39,7 +40,7 @@ https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc
     
     python object_detection/train.py \
         --logtostderr \
-        --pipeline_config_path="/media/wangjinchao/bankcard/data/ssd_mobilenet_v2_coco_2018_03_29/pipeline.config" \
+        --pipeline_config_path="/media/wangjinchao/bankcard/ssd_mobilenet_v2_coco.config" \
         --train_dir="/media/wangjinchao/bankcard/training_v2/"    
 
 ---
