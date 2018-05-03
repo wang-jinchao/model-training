@@ -7,6 +7,19 @@
 >functools.partial(tf.data.TFRecordDataset, buffer_size=8 * 1000 * 1000),
 AttributeError: 'module' object has no attribute 'data'
 
+#COCO API 安装  
+
+``` 
+    sudo pip install Cython  
+    sudo pip install fasttext
+```
+
+- git clone https://github.com/cocodataset/cocoapi.git
+- cd cocoapi / PythonAPI && mv ../common ./
+- / *更新所有拥有../common引用的文件 - 用“common”替换“../common”* /
+- / *将“REQUIRED_PACKAGES = ['Cython> = 0.28.1']”添加到setup.py * /
+- cd .. && tar -czf pycocotools-2.0.tar.gz PythonAPI /
+- make
 
 Protobuf Compilation  
 https://github.com/tensorflow/models/issues/1834  
@@ -47,16 +60,25 @@ https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc
 ## 评估：
     python object_detection/eval.py \
     --logtostderr \
+    --pipeline_config_path="/media/wangjinchao/bankcard/ssd_mobilenet_v2_coco.config" \
+    --checkpoint_dir="/media/wangjinchao/bankcard/training_v2/" \
+    --eval_dir="/media/wangjinchao/bankcard/Evaluation_v2/"
+
+
+
+ python object_detection/eval.py \
+    --logtostderr \
     --pipeline_config_path="/media/wangjinchao/bankcard/ssd_mobilenet_v1_coco.config" \
     --checkpoint_dir="/media/wangjinchao/bankcard/training/" \
     --eval_dir="/media/wangjinchao/bankcard/Evaluation_v1/"
+
 
 
 ## TensorBoard监控：  
 
 - localhost:6006  
 
-- tensorboard --logdir= .
+- tensorboard --logdir= "/media/wangjinchao/bankcard/Evaluation_v2/"
 
 - tensorboard --logdir= . --port = 6007
 
@@ -94,3 +116,4 @@ rewrite_options = rewriter_config_pb2.RewriterConfig()
 https://github.com/tensorflow/tensorflow/issues/582
 
 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
+
