@@ -78,7 +78,7 @@ https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc
 
 - localhost:6006  
 
-- tensorboard --logdir= "/media/wangjinchao/bankcard/Evaluation_v2/"
+- tensorboard --logdir="/media/wangjinchao/bankcard/training_v2/"
 
 - tensorboard --logdir= . --port = 6007
 
@@ -98,22 +98,8 @@ https://www.ctolib.com/topics-125559.html
 trained_checkpoint_prefix应该指定多少代的模型，--trained_checkpoint_prefix /media/wangjinchao/bankcard/training/model.ckpt-9961
 
 
-
-ValueError: Protocol message RewriterConfig has no "layout_optimizer" field.
-
-
-"layout_optimizer" to "optimize_tensor_layout" on line 72 in exporter.py
-
-
-models/research/object_detection/exporter.py line 71/72 from
-
-rewrite_options = rewriter_config_pb2.RewriterConfig(
-          layout_optimizer=rewriter_config_pb2.RewriterConfig.ON)
-to
-rewrite_options = rewriter_config_pb2.RewriterConfig()
-
-
-https://github.com/tensorflow/tensorflow/issues/582
-
-PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
-
+    python export_inference_graph.py \
+    --input_type image_tensor \
+    --pipeline_config_path "/media/wangjinchao/bankcard/ssd_mobilenet_v2_coco.config" \
+    --trained_checkpoint_prefix "/media/wangjinchao/bankcard/training_v2/model.ckpt-5000" \
+    --output_directory "/media/wangjinchao/bankcard/result2/output_inference_graph.pb"  
