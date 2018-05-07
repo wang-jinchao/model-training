@@ -56,14 +56,25 @@ https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc
         --pipeline_config_path="/media/wangjinchao/bankcard/ssd_mobilenet_v2_coco.config" \
         --train_dir="/media/wangjinchao/bankcard/training_v2/"    
 
+    python object_detection/train.py \
+        --logtostderr \
+        --pipeline_config_path="/media/wangjinchao/bankcard/faster_rcnn_resnet101_coco.config" \
+        --train_dir="/media/wangjinchao/bankcard/training_vfaster/"
+
 ---
-## 评估：
+## 评估：  
+
+    python object_detection/eval.py \
+    --logtostderr \
+    --pipeline_config_path="/media/wangjinchao/bankcard/faster_rcnn_resnet101_coco.config" \
+    --checkpoint_dir="/media/wangjinchao/bankcard/training_vfaster/" \
+    --eval_dir="/media/wangjinchao/bankcard/Evaluation_vfaster/"
+
     python object_detection/eval.py \
     --logtostderr \
     --pipeline_config_path="/media/wangjinchao/bankcard/ssd_mobilenet_v2_coco.config" \
     --checkpoint_dir="/media/wangjinchao/bankcard/training_v2/" \
     --eval_dir="/media/wangjinchao/bankcard/Evaluation_v2/"
-
 
 
  python object_detection/eval.py \
@@ -78,7 +89,7 @@ https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc
 
 - localhost:6006  
 
-- tensorboard --logdir="/media/wangjinchao/bankcard/training_v2/"
+- tensorboard --logdir="/media/wangjinchao/bankcard/training_vfaster/"
 
 - tensorboard --logdir= . --port = 6007
 
@@ -101,5 +112,27 @@ trained_checkpoint_prefix应该指定多少代的模型，--trained_checkpoint_p
     python export_inference_graph.py \
     --input_type image_tensor \
     --pipeline_config_path "/media/wangjinchao/bankcard/ssd_mobilenet_v2_coco.config" \
-    --trained_checkpoint_prefix "/media/wangjinchao/bankcard/training_v2/model.ckpt-5000" \
+    --trained_checkpoint_prefix "/media/wangjinchao/bankcard/training_v2/model.ckpt-99343" \
     --output_directory "/media/wangjinchao/bankcard/result2/output_inference_graph.pb"  
+
+
+
+# 远程访问jupyter notebook  
+    jupyter notebook --generate-config
+
+    In [1]: from notebook.auth import passwd
+    In [2]: passwd()
+    Enter password: 
+    Verify password: 
+   'sha1:aed7be4fd5e6:32459a4ccf53417d97520013cd4ae72065e05306'  
+    
+    vim ~/.jupyter/jupyter_notebook_config.py
+    --------------------------------------------------------------------------------
+    c.NotebookApp.ip='*'     #line162
+    c.NotebookApp.password = u'sha:ce...刚才复制的那个密文'  #这里我没有加u， 生成的sha1:.... 复制到这里就OK  #line217
+    c.NotebookApp.open_browser = False    #line208
+    c.NotebookApp.port =8888 #随便指定一个端口#line228  
+    --------------------------------------------------------------------------------  
+   #### 启动jupyter notebook:
+    #From tensorflow/models/research/object_detection
+    jupyter notebook
