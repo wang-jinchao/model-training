@@ -12,7 +12,8 @@ AttributeError: 'module' object has no attribute 'data'
 ``` 
     sudo pip install Cython  
     sudo pip install fasttext
-```
+```s
+https://github.com/tensorflow/models/issues/3470
 
 - git clone https://github.com/cocodataset/cocoapi.git
 - cd cocoapi / PythonAPI && mv ../common ./
@@ -20,6 +21,7 @@ AttributeError: 'module' object has no attribute 'data'
 - / *将“REQUIRED_PACKAGES = ['Cython> = 0.28.1']”添加到setup.py * /
 - cd .. && tar -czf pycocotools-2.0.tar.gz PythonAPI /
 - make
+- python setup.py install
 
 Protobuf Compilation  
 https://github.com/tensorflow/models/issues/1834  
