@@ -89,7 +89,7 @@ https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc
 
 - localhost:6006  
 
-- tensorboard --logdir="/media/wangjinchao/bankcard/training_vfaster/"
+- tensorboard --logdir="/media/wangjinchao/bankcard/Evaluation_v2/"
 
 - tensorboard --logdir= . --port = 6007
 
@@ -115,6 +115,11 @@ trained_checkpoint_prefix应该指定多少代的模型，--trained_checkpoint_p
     --trained_checkpoint_prefix "/media/wangjinchao/bankcard/training_v2/model.ckpt-99343" \
     --output_directory "/media/wangjinchao/bankcard/result2/output_inference_graph.pb"  
 
+    python export_inference_graph.py \
+    --input_type image_tensor \
+    --pipeline_config_path "/media/wangjinchao/bankcard/faster_rcnn_resnet101_coco.config" \
+    --trained_checkpoint_prefix "/media/wangjinchao/bankcard/training_vfaster/model.ckpt-28900" \
+    --output_directory "/media/wangjinchao/bankcard/result_faster/output_inference_graph.pb"
 
 
 # 远程访问jupyter notebook  
